@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>projectJs</title>
+	<script type="text/javascript" src="js/jquery-3.1.1.min.js"></script>
+</head>
+<body>
+<form id="form1" >
+	<p>Брой дни</p>
+	<input id="day" type="text">
+	
+</form>
+
+<script>
+	   $('#day').keypress(function() {
+   		 var day = $( this).val();
+    	
+   		 	console.log(day);	
+
+		 
+  		if(day < 1 || day >=6 || isNaN(day)){
+
+			 //ev.preventDefault();
+
+			$('<div></div>').text('Избeрете брой дни между 1 и 5').appendTo(document.body).css('color', 'red');
+			 
+			}
+ 
+ });
+</script>
+</body>
+</html>
