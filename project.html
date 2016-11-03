@@ -8,12 +8,13 @@
 <form id="form1" >
 	<p>Брой дни</p>
 	<input id="day" type="text">
-	
 </form>
 
 <script>
 	   $('#day').change(function() {
-   		 var day = $( this).val();
+	   	var day, un, deux, trois;
+
+   		 day = $( this).val();
     	
    		 	console.log(day);	
 		 
@@ -23,42 +24,61 @@
 			 
 			 } else{
 				for (var i=1; i<=day; i++){
-
-					var p1 = $('<p></p>').text('Брой дейности за ден '+i).appendTo('body');
+					//var flag;
+					
+					var p1 = $('<p></p>').text('Брой дейности за ден '+i).css('color', 'green').appendTo('body');
 
 					var input1 = $('<input></input>').attr('type', 'text').attr('name', 'one').attr('id', 'one' +i).appendTo('body');
 
-					var p2 = $('<p></p>').text('Избери дейност').appendTo('body');
+					var p2 = $('<p></p>').text('Избери дейност').css('color', 'blue').appendTo('body');
 
 					var input2 = $('<input></input>').attr('type', 'text').attr('name', 'two').attr('id', 'two' +i).appendTo('body');
 
 					$('#one' +i).change(function() {
-						
-						if (isNaN($(this).val()) || $(this).val()<1 || $(this).val() >100) {
+
+						un = $(this).val();
+
+						if (isNaN(un) || un < 1 || un > 100) {
 
 							$('<div></div>').text('Избeрете брой дейности между 1 и 100').appendTo('body').css('color', 'red');
 						};
 					 
-					 	var un = $(this).val();
-					
-						console.log(un);
-						});
-//ATTENTION////////////////////////////////////////////////////////
-						
-	
+					 
+					//flag = un;
+					//console.log(flag);
+					});
 					
 					$('#two' +i).change(function() {
+						//console.log(flag);
 							//console.log(un);
-						
-							console.log($(this).val());
+							deux = $(this).val();
+							//console.log(deux);
 
-							// if ( $( this).val() >un) {
+							if ( deux > un || deux <= 0) {
 
-							// 	$('<div></div>').text('Избeрете активност не по-голяма от '+un).appendTo('body').css('color', 'red');
-							// }  
+								$('<div></div>').text('Избeрете дейност по голяма от 0 и по-малка или равна на '+un+'!').appendTo('body').css('color', 'red');
+							}  
 						});
 
+
+					var p3 = $('<p></p>').text('Продължителност на дейността за ден '+i).css('color', 'purple').appendTo('body');
+
+					var input3 = $('<input></input>').attr('type', 'text').attr('name', 'three').attr('id', 'three' +i).appendTo('body');
+					
+					
+					$('#three' +i).change(function() {
+						console.log(un);
+						console.log(deux);
+						trois = $(this).val();
 						
+
+						if (trois >=1 || trois <= 100){
+							console.log(trois);
+						}else{
+							$('<div></div>').text('Продължителността на дейността трябва да не е по-малка от 1 мин. и по-голяма от 100 мин.!').appendTo('body').css('color', 'red');
+						}
+
+					});
 
 				}
 			}
