@@ -22,8 +22,8 @@ $('#day').change(function() {
 	day = $( this).val();    	
 
 		 //check if valid day numbers entered
-		 if(day < 1 || day >=6 || isNaN(day)){
-		 	$('<div></div>').text('Избeрете брой дни между 1 и 5').appendTo('body').css('color', 'red');
+		 if(day < 1 || day >=6 || isNaN(day) || !/^[0-9]+$/.test(day)){
+		 	$('<div></div>').text('Избeрете цяло число между 1 и 5.').appendTo('body').css('color', 'red');
 
 		 } else{
 
@@ -45,7 +45,15 @@ $('#day').change(function() {
 
 					$('input[name=one]').change(function(){
 
-						daysQuantity = $(this).val();
+					 daysQuantity = $(this).val();
+						
+						//console.log(daysQuantity);
+
+						if(isNaN(daysQuantity) || !/^[0-9]+$/.test(daysQuantity)){
+
+							$('<div></div>').text('Броят дейности трябва да е цяло число.').appendTo('body').css('color', 'red');
+						} else{
+								
 
 						flag = $(this).attr('id').split('one')[1];
 
@@ -53,8 +61,8 @@ $('#day').change(function() {
 						for (var j = 1; j <= daysQuantity; j++){
 
 							var durationInfo = $('<p></p>')
-							.text('Въведете продължителност за дейност '+ j + ' / ден ' + flag) 
-							.css('color', 'green')
+							.text('Въведете продължителност /ЦЯЛО ЧИСЛО/ за дейност '+ j + ' / ден ' + flag) 
+							.css('color', 'purple')
 							.appendTo('body');
 
 
@@ -65,10 +73,10 @@ $('#day').change(function() {
 							.appendTo('body');
 
 						}
-
+					}
 						//CREATING FIELD TO SELECT ACTIVITY
 						$('<p></p>')
-						.text('Избери дейност')
+						.text('Избери дейност не по-голяма от броя на продължителностите')
 						.css('color', 'blue')
 						.appendTo('body');
 						
@@ -114,8 +122,7 @@ $('input[type=submit]').click(function(ev){
 		}
 	 }//end for loop
 	 result.push(currentResult);
-	 
-
+	
 
 var arrElementsCounter = [];
 var resultDuration = [], resDuration = [];
@@ -137,32 +144,35 @@ var v = -1;
 			arrElementsCounter.push(selectedActivity[n].value);
 		v++;			
 		} else {
-
-	 		arrElementsCounter.push(selectedActivity[n].value);
-	 		
+			
+	 		arrElementsCounter.push(selectedActivity[n].value); 		
 		}
 	 }//end for loop
 	 resDuration.push(arrElementsCounter);
 	 //console.log(resDuration);
 
-
 	 //DURATION VALUES FOR CHOOSEN DAYS 
 
 	 for(var m = 0; m < resDuration.length; m++){
 	 	var cur = resDuration[m];
-
+	 	
 	 	for (var u = 0; u < cur.length; u++){
 	 		var q = cur[u];
+	 		console.log(q);
 	 		
 	 		var curArr = result[u];
 	 		var huq=curArr[q-1];
 	 		//console.log(curArr);
 	 		//console.log(huq);
-				
-				$('<p></p>')
-						.text('Продължителността на избраната дейност за ден '+(u+1)+' е '+huq+' минути!')
-						.css('color', 'red')
-						.appendTo('body');           
+				if (isNaN(huq) || !/^[0-9]+$/.test(huq)) {
+
+	 					$('<div></div>').text('ГРЕШКА - чети внимателно надписите над полетата!').appendTo('body').css('color', 'red');			
+	 			}else{
+	 						$('<p></p>')
+							.text('Продължителността на избраната дейност за ден '+(u+1)+' е '+huq+' минути!')
+							.css({fontSize: "20px",color: "red"})
+							.appendTo('body');	
+	 				} 				
         }
 
     }//end for loop
