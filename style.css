@@ -1,0 +1,21 @@
+body {
+    font-family: Arial, sans-serif;
+    /*background-color: #F2EFFF;*/
+    background-image: url("1.jpg");
+    text-align: center;
+    margin: auto;
+    width: 700px;
+    border: 4px dotted red;
+    padding: 0 3em 1em;
+}
+
+h1 {
+	color: #3D989B;
+	margin-bottom: .5em;	
+}
+
+#sub{
+	background-color: red;
+	color: white;
+}
+

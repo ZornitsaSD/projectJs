@@ -2,13 +2,15 @@
 <html>
 <head>
 	<title>projectJs</title>
+	<link rel="stylesheet" href="style.css">
 	<script type="text/javascript" src="js/jquery-3.1.1.min.js"></script>
 </head>
 <body>
+	<h1>Списъкът на Иво</h1>
 	<form id="form1" >
 		<p>Брой дни</p>
 		<input id="day" type="text">
-		<input type="submit" name="submit">
+		<input id="sub" type="submit" name="submit" value="Избери">
 	</form>
 
 	<script>
@@ -49,6 +51,7 @@ $('#day').change(function() {
 						
 						//console.log(daysQuantity);
 
+						//check if the number of activties is valid
 						if(isNaN(daysQuantity) || !/^[0-9]+$/.test(daysQuantity)){
 
 							$('<div></div>').text('Броят дейности трябва да е цяло число.').appendTo('body').css('color', 'red');
@@ -148,8 +151,8 @@ var v = -1;
 	 		arrElementsCounter.push(selectedActivity[n].value); 		
 		}
 	 }//end for loop
-	 resDuration.push(arrElementsCounter);
-	 //console.log(resDuration);
+	 resDuration.push(arrElementsCounter); //array with number of choosen activities, ex. if they are two -  [Array[2]];
+	 // console.log(resDuration);
 
 	 //DURATION VALUES FOR CHOOSEN DAYS 
 
@@ -174,7 +177,6 @@ var v = -1;
 							.appendTo('body');	
 	 				} 				
         }
-
     }//end for loop
         
 });
