@@ -3,8 +3,8 @@ body {
     /*background-color: #F2EFFF;*/
     background-image: url("1.jpg");
     margin: auto;
-    padding: 0 3em 1em;
     width: 700px;
+    padding: 0 3em 1em;
     border: 4px dotted red;
     text-align: center;
 }
