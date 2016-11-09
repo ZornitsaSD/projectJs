@@ -1,17 +1,16 @@
 body {
     font-family: Arial, sans-serif;
-    /*background-color: #F2EFFF;*/
     background-image: url("1.jpg");
     margin: auto;
     width: 700px;
-    padding: 0 3em 1em;
+    padding: 0 46px 16px;
     border: 4px dotted red;
     text-align: center;
 }
    
 h1 {
 	color: #3D989B;
-	margin-bottom: .4em;	
+	margin-bottom: 40px;	
 }
 
 #sub{
