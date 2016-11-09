@@ -24,9 +24,11 @@ $('#day').change(function() {
 	day = $( this).val();    	
 
 		 //check if valid day numbers entered
-		 if(day < 1 || day >=6 || isNaN(day) || !/^[0-9]+$/.test(day)){
-		 	$('<div></div>').text('Избeрете цяло число между 1 и 5.').appendTo('body').css('color', 'red');
-
+		 if(isNaN(day) || !/^[0-9]+$/.test(day)){
+		 	$('<div></div>')
+		 	.text('Избраният брой дни трябва да е цяло число.')
+		 	.appendTo('body')
+		 	.css('color', 'red');
 		 } else{
 
 		 	for (var i=1; i<=day; i++){									
@@ -43,7 +45,7 @@ $('#day').change(function() {
 		 		
 					}//end of for loop creating days 
 
-					//SELECTING DAY`S QUANTITY
+					//SELECTING DAY`S QUANTITY - activities for day
 
 					$('input[name=one]').change(function(){
 
@@ -54,11 +56,14 @@ $('#day').change(function() {
 						//check if the number of activties is valid
 						if(isNaN(daysQuantity) || !/^[0-9]+$/.test(daysQuantity)){
 
-							$('<div></div>').text('Броят дейности трябва да е цяло число.').appendTo('body').css('color', 'red');
+							$('<div></div>')
+							.text('Броят дейности трябва да е цяло число.')
+							.appendTo('body')
+							.css('color', 'red');
 						} else{
 								
-
 						flag = $(this).attr('id').split('one')[1];
+						//console.log(flag);
 
 						//CREATING FIELDS TO SET DURATIONS
 						for (var j = 1; j <= daysQuantity; j++){
@@ -68,13 +73,11 @@ $('#day').change(function() {
 							.css('color', 'purple')
 							.appendTo('body');
 
-
 							var duration = $('<input></input>')
 							.attr({'type': 'text',
 									'name': 'duration',
 									'class': 'duration' + flag})
 							.appendTo('body');
-
 						}
 					}
 						//CREATING FIELD TO SELECT ACTIVITY
@@ -102,10 +105,11 @@ $('input[type=submit]').click(function(ev){
 
 	var arrDurations = $('input[name=duration]');
 //console.log(arrDurations);
-	var p = -1;
-	var currentResult = [];
-	var classNames = [],
-		result = [];
+	var p = -1, 
+	currentResult = [], 
+	classNames = [],
+	result = [];
+
 	for(var n = 0; n< arrDurations.length; n++){
 		var currentClass = arrDurations[n].getAttribute('class');
 		//console.log(currentClass);	
@@ -124,13 +128,15 @@ $('input[type=submit]').click(function(ev){
 	 		//console.log(currentResult);
 		}
 	 }//end for loop
-	 result.push(currentResult);
+	 result.push(currentResult);//array with number of activities, ex. if they are two -  [Array[2]];
+	 //console.log(result);
 	
 
-var arrElementsCounter = [];
-var resultDuration = [], resDuration = [];
-var classNam = [];
-var v = -1;
+var arrElementsCounter = [], 
+resultDuration = [], 
+resDuration = [], 
+classNam = [];
+
  var selectedActivity = $('input[name=selected_activity]');
 
  for(var n = 0; n< selectedActivity.length; n++){
@@ -145,23 +151,23 @@ var v = -1;
 	 	}
 			
 			arrElementsCounter.push(selectedActivity[n].value);
-		v++;			
+		p++;			
 		} else {
 			
 	 		arrElementsCounter.push(selectedActivity[n].value); 		
 		}
 	 }//end for loop
 	 resDuration.push(arrElementsCounter); //array with number of choosen activities, ex. if they are two -  [Array[2]];
-	 // console.log(resDuration);
+	 //console.log(resDuration);
 
-	 //DURATION VALUES FOR CHOOSEN DAYS 
+	 //DURATION VALUES FOR CHOOSEN ACTIVITIES 
 
 	 for(var m = 0; m < resDuration.length; m++){
 	 	var cur = resDuration[m];
 	 	
 	 	for (var u = 0; u < cur.length; u++){
 	 		var q = cur[u];
-	 		console.log(q);
+	 		console.log(q);//choosen activity
 	 		
 	 		var curArr = result[u];
 	 		var huq=curArr[q-1];
@@ -169,12 +175,15 @@ var v = -1;
 	 		//console.log(huq);
 				if (isNaN(huq) || !/^[0-9]+$/.test(huq)) {
 
-	 					$('<div></div>').text('ГРЕШКА - чети внимателно надписите над полетата!').appendTo('body').css('color', 'red');			
+	 					$('<div></div>')
+	 					.text('ГРЕШКА - чети внимателно надписите над полетата!')
+	 					.appendTo('body')
+	 					.css('color', 'red');			
 	 			}else{
-	 						$('<p></p>')
-							.text('Продължителността на избраната дейност за ден '+(u+1)+' е '+huq+' минути!')
-							.css({fontSize: "20px",color: "red"})
-							.appendTo('body');	
+	 					$('<p></p>')
+						.text('Продължителността на избраната дейност за ден '+(u+1)+' е '+huq+' минути!')
+						.css({fontSize: "20px",color: "red"})
+						.appendTo('body');	
 	 				} 				
         }
     }//end for loop
